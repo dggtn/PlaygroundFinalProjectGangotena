@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from PlaygroundFinalProjectGangotena.views import posts, nuevoPost,publicar
+
 
 urlpatterns = [
+    path('posts/', posts, name="posts"),
+    path('posts/nuevo', nuevoPost, name='nuevoPost'),
     path('admin/', admin.site.urls),
+    path('posts/publicar/', publicar, name="publicar")
 ]
