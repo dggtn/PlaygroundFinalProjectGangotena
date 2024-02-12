@@ -1,12 +1,19 @@
 {% extends "layout.html" %}
 
 {% block contenido%}
+<h1>Todos los participantes:</h1>
 {% for usuario in usuarios%}
 
-<h1>Nombre:{{usuario.nombre}}</h1>
-<h2>Apellido{{usuario.apellido}}</h2>
-<h3>Apodo:{{usuario.apodo}}</h3>
-<h4>País:{{usuario.pais}}</h4>
+<div class= "card primary">
+<p>Nombre:{{usuario.nombre}}</p>
+<br>
+<p>Apellido{{usuario.apellido}}</p>
+<br>
+<p>Apodo:{{usuario.apodo}}</p>
+<br>
+<p>País:{{usuario.pais}}</p>
+<br>
+</div>
 {%endfor%}
 
 
