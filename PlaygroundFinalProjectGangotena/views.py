@@ -45,17 +45,6 @@ def usuarios(request):
     html = template.render(contexto, request)
     return HttpResponse(html)
 
-def comentarios(request):
-    template = loader.get_template('comentarios.html')
-    
-    comentarios = Comentarios.objects.all()
-    contexto = {
-        'comentarios': comentarios
-    }
-
-    html = template.render(contexto, request)
-    return HttpResponse(html)
-
 def nuevoUsuario(request):
     template = loader.get_template('nuevoUsuario.html')
     html = template.render(request=request)
@@ -70,6 +59,19 @@ def guardar(request):
 
         Usuarios(nombre = nombre, apellido =apellido,apodo=apodo,pais=pais).save()
     return redirect('usuarios')
+
+def comentarios(request):
+    template = loader.get_template('comentarios.html')
+    
+    comentarios = Comentarios.objects.all()
+    contexto = {
+        'comentarios': comentarios
+    }
+
+    html = template.render(contexto, request)
+    return HttpResponse(html)
+
+
 
 def nuevoComentario(request):
     template = loader.get_template('nuevoComentario.html')
