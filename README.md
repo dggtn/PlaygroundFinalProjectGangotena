@@ -10,26 +10,27 @@ Blog de publicaciones entre usuarios
 
 ## Descripción del Proyecto
 Página Web destinada a usuarios que deseen publicar sus opiniones o ideas.
+## Dónde están las funcionalidades?
+-En la seccion usuarios se ven los usuarios de la BD.
+-En la seccion ver posts se ven los posts publicados y se pueden buscar por titulo.
+-En la seccion escribir posts se puede rellenar el formulario para publicar tu propio post.
+-En la seccion crear usuario se puede rellenar formulario para crear tu propio usuario.
 
 
 Los usuarios pueden realizar las siguientes accciones:
-- Publicar sus comentarios o ideas
+-Publicar posts
+- Publicar  comentarios que más adelante serán vinculados con los posts(Comentar en publicaciones de otros usuarios)
 - Visualizar comentarios publicados
-- Comentar en publicaciones de otros usuarios
-- Editar el perfil de Usuario
-- Cambiar la contraseña de Usuario
-- Cerrar Sesión
-- Login en caso de haber cerrado sesión
-
+- Visualizar posts publicados
 
 ## Tecnología Utilizada
 
 ##### Front-End
-- HTML 5
-- CSS 3
+- HTML 
+- CSS 
 - Javascript ES6
-- Bootstrap 5.2
+- Bootstrap 
 
 ##### Back-End
-- Python 3.10.4
-- Django 4.0
+- Python 
+- Django 
