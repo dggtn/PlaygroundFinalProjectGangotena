@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 
 {% block contenido%}
+    <div class="col-md-3 ml-md-auto">
+        <form action="/posts" method="GET">
+            <div class="input-group">
+                <input type="search" name="query" class="form-control rounded" placeholder="Buscar post por titulo" aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>Buscar</button>
+            </div>
+        </form>
+    </div>
+
     {% for post in posts %}
         <h2>{{post.titulo}}</h2>
         <p>{{post.cuerpo}}</p>

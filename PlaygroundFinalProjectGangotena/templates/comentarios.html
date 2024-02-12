@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block contenido%}
+{% for comentario in comentarios%}
+<h2>{{comentario.autor}}</h2>
+<p>{{comentario.cuerpo}}</p>
+
+{% endfor%}
+
+
+<a class="btn btn-primary" href="{% url 'nuevoComentario' %}" role="button">Comentar</a>
+
+
+
+{% endblock %}
