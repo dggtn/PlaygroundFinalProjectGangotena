@@ -4,9 +4,9 @@
 <h1 class="text-info">Todos los participantes:</h1>
 {% for usuario in usuarios%}
 <div class="container">
-<div class="row">
-<div class= "card mx-3 mt-2 mb-2 border-info col-6">
-<p class="text-info">Nombre:</p><p>{{usuario.nombre}}</p>
+    <div class="row">
+    <a  href="{% url 'usuarioPorId' id=usuario.id %}"style="text-decoration: none " class="card mb-3 mt-3">
+<p class="text-info no-link">Nombre:</p><p>{{usuario.nombre}}</p>
 <br>
 <p class="text-info">Apellido:</p><p>{{usuario.apellido}}</p>
 <br>
@@ -14,9 +14,10 @@
 <br>
 <p class="text-info">País:</p><p>{{usuario.pais}}</p>
 <br>
+        </a>
 </div>
 </div>
-</div>
+
 {%endfor%}
 
 

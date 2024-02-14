@@ -45,6 +45,15 @@ def usuarios(request):
     html = template.render(contexto, request)
     return HttpResponse(html)
 
+
+def usuarioPorId(request,id):
+  usuarioPorId = Usuarios.objects.get(pk=id)
+  template = loader.get_template('usuario.html')
+  context = {
+    'usuario': usuarioPorId,
+  }
+  return HttpResponse(template.render(context, request))
+
 def nuevoUsuario(request):
     template = loader.get_template('nuevoUsuario.html')
     html = template.render(request=request)

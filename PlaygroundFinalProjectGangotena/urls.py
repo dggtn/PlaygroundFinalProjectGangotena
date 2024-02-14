@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PlaygroundFinalProjectGangotena.views import index,posts, nuevoPost,publicar,usuarios,comentarios,guardar,comentar,nuevoUsuario,nuevoComentario
+from PlaygroundFinalProjectGangotena.views import index,posts, nuevoPost,publicar,usuarios,usuarioPorId,comentarios,guardar,comentar,nuevoUsuario,nuevoComentario
 
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('posts/publicar/', publicar, name="publicar"),
     path('usuarios/', usuarios, name="usuarios"),
     path('comentarios/', comentarios, name="comentarios"),
+    path('usuarios/usuarioPorId/<int:id>', usuarioPorId, name="usuarioPorId"),
     path('usuarios/nuevo/', nuevoUsuario, name="nuevoUsuario"),
     path('usuarios/nuevo/guardar/', guardar, name="guardar"),
     path('comentarios/nuevo/', nuevoComentario, name="nuevoComentario"),
