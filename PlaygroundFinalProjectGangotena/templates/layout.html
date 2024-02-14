@@ -36,9 +36,12 @@
             <a class="nav-link " href="{% url 'nuevoUsuario' %}" tabindex="-1" >Crear Usuario</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <form class="d-flex"type="search" placeholder="Buscar" aria-label="Search">
+          <form action="/posts" method="GET">
+            <div class="input-group">
+                <input type="search" name="query" class="form-control me-2"  placeholder="Buscar posts por titulo" aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn fs-4 btn-outline-info" data-mdb-ripple-init>Buscar</button>
+            </div>
         </form>
       </div>
     </div>
