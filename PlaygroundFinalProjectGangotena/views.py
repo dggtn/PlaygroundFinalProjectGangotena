@@ -22,6 +22,14 @@ def posts(request):
     html = template.render(contexto, request)
     return HttpResponse(html)
 
+def postPorId(request,id):
+  postPorId = Post.objects.get(pk=id)
+  template = loader.get_template('post.html')
+  context = {
+    'post': postPorId,
+  }
+  return HttpResponse(template.render(context, request))
+
 def nuevoPost(request):
     template = loader.get_template('nuevoPost.html')
     html = template.render(request=request)
@@ -37,11 +45,15 @@ def publicar(request):
 def usuarios(request):
     template = loader.get_template('usuarios.html')
     
-    usuarios = Usuarios.objects.all()
+    query = request.GET.get('query')
+    if query is None:
+        usuarios = Usuarios.objects.all()
+    else:
+        usuarios= Usuarios.objects.filter(nombre__icontains=query)
+
     contexto = {
         'usuarios': usuarios
     }
-
     html = template.render(contexto, request)
     return HttpResponse(html)
 
