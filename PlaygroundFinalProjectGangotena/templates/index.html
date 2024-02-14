@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block contenido%}
+    
+<div class="p-3 mb-2 bg-info text-dark">
+  <div class="container p-3 mb-2 bg-white text-dark">
+    <h1 class="text-info">Bienvenido al blog</h1>
+    <p>Un lugar dónde puedes publicar posts y comentar el de tus amigos</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'nuevoPost' %}" role="button">Empieza a escribir tus propias ideas acá</a>
+</div>
+
+{% endblock %}
+

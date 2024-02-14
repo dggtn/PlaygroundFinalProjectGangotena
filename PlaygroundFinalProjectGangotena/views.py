@@ -84,3 +84,8 @@ def comentar(request):
         cuerpo = request.POST['cuerpo']
         Comentarios(autor=autor, cuerpo=cuerpo).save()
     return redirect('comentarios')
+
+def index(request):
+    template = loader.get_template('index.html')
+    html = template.render(request=request)
+    return HttpResponse(html)

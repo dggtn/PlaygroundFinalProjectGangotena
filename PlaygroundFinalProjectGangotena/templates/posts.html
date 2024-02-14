@@ -5,17 +5,17 @@
         <form action="/posts" method="GET">
             <div class="input-group">
                 <input type="search" name="query" class="form-control rounded" placeholder="Buscar post por titulo" aria-label="Search" aria-describedby="search-addon" />
-                <button type="submit" class="btn btn-outline-primary" data-mdb-ripple-init>Buscar</button>
+                <button type="submit" class="btn fs-4 btn-outline-info" data-mdb-ripple-init>Buscar</button>
             </div>
         </form>
     </div>
 
     {% for post in posts %}
-        <h2>{{post.titulo}}</h2>
+        <h2 class="text-info">{{post.titulo}}</h2>
         <p>{{post.cuerpo}}</p>
     {% endfor %}
 
-    <a class="btn btn-primary" href="{% url 'nuevoPost' %}" role="button">Crear post</a>
+    <a class="btn btn-info text-white fs-4" href="{% url 'nuevoPost' %}" role="button">Crear post</a>
 
 {% endblock %}
 
