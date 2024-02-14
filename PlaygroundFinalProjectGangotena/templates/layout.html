@@ -15,12 +15,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'usuarios' %}">Usuarios</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Posts
@@ -28,14 +22,26 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{% url 'posts' %}">Ver posts</a></li>
               <li><a class="dropdown-item" href="{% url 'nuevoPost' %}">Escribir Posts</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{% url 'usuarios' %}">Ver usuarios</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'nuevoUsuario' %}" tabindex="-1" >Crear Usuario</a>
-          </li>
-        </ul>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Comentarios
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'comentarios' %}">Ver comentarios</a></li>
+                <li><a class="dropdown-item" href="{% url 'nuevoComentario' %}">Escribir comentarios</a></li>
+              </ul>
+        
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Usuarios
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'usuarios' %}">Ver usuarios</a></li>
+                  <li><a class="dropdown-item" href="{% url 'nuevoUsuario' %}">Crear Usuario</a></li>
+                </ul>
+              </ul>
         <form class="d-flex"type="search" placeholder="Buscar" aria-label="Search">
           <form action="/usuarios" method="GET">
             <div class="input-group">
