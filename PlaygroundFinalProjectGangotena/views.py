@@ -1,10 +1,16 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.views.generic import ListView
+from django.views.generic import DetailView
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from modelos.models import Post
 from modelos.models import Usuarios
 from modelos.models import Comentarios
 from django.shortcuts import redirect
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login,authenticate
 
 def posts(request):
     template = loader.get_template('posts.html')
@@ -110,3 +116,27 @@ def index(request):
     template = loader.get_template('index.html')
     html = template.render(request=request)
     return HttpResponse(html)
+
+def login_request(request):
+    form = AuthenticationForm()
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            usuario =  form.cleaned_data.get("username")
+            contrasenia = form.cleaned_data.get("password")
+
+            user = authenticate(username = usuario, password = contrasenia)
+            login(request,user)
+            return render(request, "/index.html", {"mensaje": f"Bienvenido {user.username}"})
+    return render(request, "login.html", {"form":form})
+
+def register(request):
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request,"index.html",{"mensaje":"Usuario Creado:)"})
+        
+    return render (request,"registro.html", {"form":form})
