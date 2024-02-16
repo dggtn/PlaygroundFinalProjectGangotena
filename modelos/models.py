@@ -10,6 +10,7 @@ class Usuarios(models.Model):
     apellido = models.CharField(max_length=10)
     apodo = models.CharField(max_length=10)
     pais = models.CharField(max_length=20)
+    email = models.EmailField(default = "")
 
 class Comentarios(models.Model):
     autor = models.CharField(max_length=15)

@@ -139,6 +139,8 @@ def register(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
+            usuario = Usuarios(nombre = form.cleaned_data['nombre'],apellido = form.cleaned_data['apellido'],apodo = form.cleaned_data['apodo'],pais = form.cleaned_data['pais'],email = form.cleaned_data['email'])
+            usuario.save()
             return render(request,"index.html",{"mensaje":"Usuario Creado:)"})
-        
+            
     return render (request,"registro.html", {"form":form})
