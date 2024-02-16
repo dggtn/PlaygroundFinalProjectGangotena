@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from PlaygroundFinalProjectGangotena.form import UserCreationFormCustom
+from PlaygroundFinalProjectGangotena.form import UserCreationFormCustom,UserEditForm
 from modelos.models import Post
 from modelos.models import Usuarios
 from modelos.models import Comentarios
@@ -13,6 +13,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,authenticate
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def posts(request):
     template = loader.get_template('posts.html')
@@ -144,3 +146,23 @@ def register(request):
             return render(request,"index.html",{"mensaje":"Usuario Creado:)"})
             
     return render (request,"registro.html", {"form":form})
+
+def editarPerfil(request):
+    usuario= request.user
+    if request.method =='POST':
+       miFormulario = UserEditForm(request.POST, instance= request.user)
+
+       if miFormulario.is_valid():
+           if miFormulario.cleaned_data.get('imagen'):
+               usuario.avatar.imagen = miFormulario.cleaned_data.get('imagen')
+               usuario.avatar.save()
+           miFormulario.save()
+
+           return render(request,"index.html")
+    else:
+        miFormulario = UserEditForm (initial={'imagen':usuario.avatar.imagen}, instance=request.user)
+    return render(request, "editaPerfil.html",{"miFormulario":miFormulario,"usuario":usuario}) 
+
+class CambiarContrasenia(LoginRequiredMixin,PasswordChangeView):
+        template_name="cambiarContrasenia.html"
+        succes_url = reverse_lazy('cambiarContrasenia')

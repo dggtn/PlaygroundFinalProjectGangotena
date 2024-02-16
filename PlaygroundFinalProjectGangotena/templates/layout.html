@@ -15,17 +15,26 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if not request.user.is_authenticated %}
           <li>
           <a  class="nav-link"  href="{% url 'login' %}">Login</a>
           </li>
           <li>
             <a class="nav-link" href="{% url 'registro' %}">Registro</a>
           </li>
+          {%else%}
+          <li>
+            <a class="navbar-brand" href="{% url 'editarPerfil'%}">{{request.user.username}}</a>
+          </li>
           <li>
             <form action = "{% url 'logout' %}" method="POST">{% csrf_token %}
               <button type="submit">Logout</button>
             </form>
           </li>
+          {%endif%}
+          {%if request.user.avatar%}
+          <img src="{{request.user.avatar.imagen.url}}" alt="" height="40px">
+          {%endif%}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Posts

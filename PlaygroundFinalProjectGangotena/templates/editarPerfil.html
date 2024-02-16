@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block contenido%}
+    <h1>Formulario-Editar Perfil</h1>
+    <h2>De {{usuario}}</h2>
+<form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
+<table>
+  {{miFormulario}}
+</table>
+<input type="submit", value="Enviar">
+</form>
+<button type="button">
+  <a class="navbar-brand" href="{%url 'cambiarContrasenia'%}">cambiar contrasenia</button>
+{% endblock %}
+

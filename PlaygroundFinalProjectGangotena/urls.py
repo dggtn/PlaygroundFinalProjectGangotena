@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PlaygroundFinalProjectGangotena.views import index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,comentarios,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request
+from PlaygroundFinalProjectGangotena.views import CambiarContrasenia, editarPerfil, index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,comentarios,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request
 from django.contrib.auth.views import LogoutView
-
+from modelos import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('index/', index, name="index"),
@@ -36,5 +38,11 @@ urlpatterns = [
     path('comentarios/comentar/', comentar, name="comentar"),
     path('login',login_request,name="login"),
     path('registro',register,name="registro"),
-    path('logout',LogoutView.as_view(template_name="logout.html"), name="logout")
+    path('logout',LogoutView.as_view(template_name="logout.html"), name="logout"),
+    path('editarPerfil',editarPerfil, name="editarPerfil"),
+    path('cambiarContrasenia',CambiarContrasenia.as_view(template_name="cambiarContrasenia.html"), name="cambiarContrasenia")
+    
 ]
+
+
+urlpatterns+= static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
