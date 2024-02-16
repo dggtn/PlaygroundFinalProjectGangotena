@@ -13,6 +13,7 @@ Página Web destinada a usuarios que deseen publicar sus opiniones o ideas.
 ## Dónde están las funcionalidades?
 -En la barra de navegación se elige la sección a dónde ir.
 -En el buscador de la barra de navegación se busca los usuarios por nombre.
+-Opcion login-registrarse y logout 
 -En la seccion usuarios se ven los usuarios de la BD,se puede seleccionar un usuario y ver uno por uno de manera individual.
 -En la seccion crear usuario se puede rellenar formulario para crear tu propio usuario.
 -En la seccion ver posts se ven los posts publicados y se pueden buscar por titulo.
