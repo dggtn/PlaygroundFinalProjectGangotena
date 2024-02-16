@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PlaygroundFinalProjectGangotena.views import index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,comentarios,guardar,comentar,nuevoUsuario,nuevoComentario,register,login_request
+from PlaygroundFinalProjectGangotena.views import index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,comentarios,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
@@ -33,7 +34,8 @@ urlpatterns = [
     path('usuarios/nuevo/guardar/', guardar, name="guardar"),
     path('comentarios/nuevo/', nuevoComentario, name="nuevoComentario"),
     path('comentarios/comentar/', comentar, name="comentar"),
-    path('login',login_request,name="Login"),
-    path('register', register, name="Register")
+    path('login',login_request,name="login"),
+    path('registro',register,name="registro"),
+    path('logout',LogoutView.as_view(template_name="logout.html"), name="logout")
 
 ]

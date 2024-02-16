@@ -5,11 +5,13 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
+from PlaygroundFinalProjectGangotena.form import UserCreationFormCustom
 from modelos.models import Post
 from modelos.models import Usuarios
 from modelos.models import Comentarios
 from django.shortcuts import redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,authenticate
 
 def posts(request):
@@ -131,9 +133,9 @@ def login_request(request):
     return render(request, "login.html", {"form":form})
 
 def register(request):
-    form = UserCreationForm()
+    form = UserCreationFormCustom()
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserCreationFormCustom(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             form.save()
