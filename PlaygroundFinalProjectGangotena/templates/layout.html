@@ -26,42 +26,42 @@
           <li>
             <a class="navbar-brand" href="{% url 'editarPerfil'%}">{{request.user.username}}</a>
           </li>
-          <li>
-            <form action = "{% url 'logout' %}" method="POST">{% csrf_token %}
-              <button type="submit">Logout</button>
-            </form>
-          </li>
-          {%endif%}
-          {%if request.user.avatar%}
-          <img src="{{request.user.avatar.imagen.url}}" alt="" height="40px">
-          {%endif%}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Posts
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'posts' %}">Ver posts</a></li>
-              <li><a class="dropdown-item" href="{% url 'nuevoPost' %}">Escribir Posts</a></li>
-            </ul>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'posts' %}">Ver posts</a></li>
+            <li><a class="dropdown-item" href="{% url 'nuevoPost' %}">Escribir Posts</a></li>
+          </ul>
 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Comentarios
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'comentarios' %}">Ver comentarios</a></li>
+              <li><a class="dropdown-item" href="{% url 'nuevoComentario' %}">Escribir comentarios</a></li>
+            </ul>
+      
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Comentarios
+                Usuarios
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{% url 'comentarios' %}">Ver comentarios</a></li>
-                <li><a class="dropdown-item" href="{% url 'nuevoComentario' %}">Escribir comentarios</a></li>
+                <li><a class="dropdown-item" href="{% url 'usuarios' %}">Ver usuarios</a></li>
+                <li><a class="dropdown-item" href="{% url 'nuevoUsuario' %}">Crear Usuario</a></li>
               </ul>
-        
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Usuarios
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'usuarios' %}">Ver usuarios</a></li>
-                  <li><a class="dropdown-item" href="{% url 'nuevoUsuario' %}">Crear Usuario</a></li>
-                </ul>
-              </ul>
+              <li>
+                <form action = "{% url 'logout' %}" method="POST">{% csrf_token %}
+                  <button type="submit">Logout</button>
+                </form>
+              </li>
+            </ul>
+          {%endif%}
+          {%if request.user.avatar%}
+          <img src="{{request.user.avatar.imagen.url}}" alt="" height="40px">
+          {%endif%}
       </div>
     </div>
   </nav>
