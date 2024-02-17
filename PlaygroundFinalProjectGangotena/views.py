@@ -37,19 +37,24 @@ def postPorId(request,id):
   template = loader.get_template('post.html')
   context = {
     'post': postPorId,
+    'comentarios': Comentarios.objects.filter(post__pk=postPorId.id),
   }
   return HttpResponse(template.render(context, request))
 
 def nuevoPost(request):
+    usuario = Usuarios.objects.get(email= request.user.email)
     template = loader.get_template('nuevoPost.html')
-    html = template.render(request=request)
-    return HttpResponse(html)
+    context = {
+    'usuario': usuario,
+  }
+    return HttpResponse(template.render(context, request))
    
 def publicar(request):
     if request.method == 'POST':
         titulo = request.POST['titulo']
+        autor = Usuarios(id= request.POST['id'] )
         cuerpo = request.POST['cuerpo']
-        Post(titulo=titulo, cuerpo=cuerpo).save()
+        Post(titulo=titulo, cuerpo=cuerpo, autor=autor).save()
     return redirect('posts')
 
 def usuarios(request):
@@ -91,30 +96,20 @@ def guardar(request):
         Usuarios(nombre = nombre, apellido =apellido,apodo=apodo,pais=pais).save()
     return redirect('usuarios')
 
-def comentarios(request):
-    template = loader.get_template('comentarios.html')
-    
-    comentarios = Comentarios.objects.all()
-    contexto = {
-        'comentarios': comentarios
-    }
-
-    html = template.render(contexto, request)
-    return HttpResponse(html)
-
-
 
 def nuevoComentario(request):
     template = loader.get_template('nuevoComentario.html')
     html = template.render(request=request)
     return HttpResponse(html)
 
+
 def comentar(request):
     if request.method == 'POST':
         autor = request.POST['autor']
         cuerpo = request.POST['cuerpo']
-        Comentarios(autor=autor, cuerpo=cuerpo).save()
-    return redirect('comentarios')
+        post = Post(id = request.POST['id'] )
+        Comentarios(autor=autor, cuerpo=cuerpo, post=post).save()
+    return redirect('postPorId', id = post.id)
 
 def index(request):
     template = loader.get_template('index.html')
@@ -166,3 +161,4 @@ def editarPerfil(request):
 class CambiarContrasenia(LoginRequiredMixin,PasswordChangeView):
         template_name="cambiarContrasenia.html"
         succes_url = reverse_lazy('cambiarContrasenia')
+

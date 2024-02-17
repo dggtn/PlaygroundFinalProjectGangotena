@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PlaygroundFinalProjectGangotena.views import CambiarContrasenia, editarPerfil, index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,comentarios,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request
+from PlaygroundFinalProjectGangotena.views import CambiarContrasenia, editarPerfil,index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request
 from django.contrib.auth.views import LogoutView
 from modelos import views
 from django.conf import settings
@@ -30,11 +30,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/publicar/', publicar, name="publicar"),
     path('usuarios/', usuarios, name="usuarios"),
-    path('comentarios/', comentarios, name="comentarios"),
     path('usuarios/usuarioPorId/<int:id>', usuarioPorId, name="usuarioPorId"),
     path('usuarios/nuevo/', nuevoUsuario, name="nuevoUsuario"),
     path('usuarios/nuevo/guardar/', guardar, name="guardar"),
-    path('comentarios/nuevo/', nuevoComentario, name="nuevoComentario"),
     path('comentarios/comentar/', comentar, name="comentar"),
     path('login',login_request,name="login"),
     path('registro',register,name="registro"),

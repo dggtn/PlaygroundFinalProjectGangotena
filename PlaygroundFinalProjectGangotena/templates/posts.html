@@ -13,6 +13,7 @@
     {% for post in posts %}
     <a href="{% url 'postPorId' id=post.id %}"style="text-decoration: none " class="card mb-3 mt-3" >
         <h2 class="text-info">{{post.titulo}}</h2>
+        <h5 class="text-info">Autor: {{post.autor.nombre}}  {{post.autor.apellido}}</h5>
         <p>{{post.cuerpo}}</p>
     </a>
     {% endfor %}
