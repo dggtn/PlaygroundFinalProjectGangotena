@@ -14,7 +14,15 @@
     <a href="{% url 'postPorId' id=post.id %}"style="text-decoration: none " class="card mb-3 mt-3" >
         <h2 class="text-info">{{post.titulo}}</h2>
         <h5 class="text-info">Autor: {{post.autor.nombre}}  {{post.autor.apellido}}</h5>
+        <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label fs-3 text-info bold">Fecha: {{post.fecha}}</label>
+          </div>
         <p>{{post.cuerpo}}</p>
+        <div class="mb-3">
+            {% if post.imagen %}
+            <img src={{post.imagen.url}}/>
+            {% endif %}
+          </div>
     </a>
     {% endfor %}
 

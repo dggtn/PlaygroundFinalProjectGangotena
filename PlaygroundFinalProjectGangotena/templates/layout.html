@@ -47,11 +47,15 @@
                   <button type="submit" class="btn btn-info text-dark">Logout</button>
                 </form>
               </li>
+              <li>
+                <a  class="nav-link"  href="{% url 'bio' %}">Sobre el autor del sitio web:</a>
+                </li>
             </ul>
+
           {%endif%}
-          {%if request.user.avatar%}
+         {% comment %} {%if request.user.avatar%}
           <img src="{{request.user.avatar.imagen.url}}" alt="" height="40px">
-          {%endif%}
+          {%endif%} {% endcomment %}
       </div>
     </div>
   </nav>

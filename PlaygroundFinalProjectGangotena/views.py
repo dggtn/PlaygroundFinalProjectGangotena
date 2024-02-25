@@ -1,17 +1,14 @@
+import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from django.views.generic import ListView
-from django.views.generic import DetailView
 from django.urls import reverse_lazy
-from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from PlaygroundFinalProjectGangotena.form import UserCreationFormCustom,UserEditForm
-from modelos.models import Post
+from PlaygroundFinalProjectGangotena.form import PostCreation, UserCreationFormCustom,UserEditForm
+from modelos.models import Avatar, Post
 from modelos.models import Usuarios
 from modelos.models import Comentarios
 from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -44,18 +41,21 @@ def postPorId(request,id):
 def nuevoPost(request):
     usuario = Usuarios.objects.get(email= request.user.email)
     template = loader.get_template('nuevoPost.html')
+    form =  PostCreation(initial={'id':usuario.id, 'autor':usuario.id})
     context = {
     'usuario': usuario,
+    'form':form
   }
     return HttpResponse(template.render(context, request))
    
 def publicar(request):
     if request.method == 'POST':
-        titulo = request.POST['titulo']
-        autor = Usuarios(id= request.POST['id'] )
-        cuerpo = request.POST['cuerpo']
-        Post(titulo=titulo, cuerpo=cuerpo, autor=autor).save()
-    return redirect('posts')
+        formulario = PostCreation(request.POST, request.FILES)
+        if formulario.is_valid():
+            formulario.save()        
+            return redirect('posts')
+        else:
+            return HttpResponse(formulario.errors)            
 
 def usuarios(request):
     template = loader.get_template('usuarios.html')
@@ -98,9 +98,12 @@ def guardar(request):
 
 
 def nuevoComentario(request):
+    usuario = Usuarios.objects.get(email= request.user.email)
     template = loader.get_template('nuevoComentario.html')
-    html = template.render(request=request)
-    return HttpResponse(html)
+    context = {
+    'usuario': usuario,
+  }
+    return HttpResponse(template.render(context, request))
 
 
 def comentar(request):
@@ -134,8 +137,9 @@ def register(request):
     if request.method == "POST":
         form = UserCreationFormCustom(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            form.save()
+            user = form.save()
+            avatar = Avatar(usuario=user, imagen=form.cleaned_data['imagen'])
+            avatar.save()
             usuario = Usuarios(nombre = form.cleaned_data['nombre'],apellido = form.cleaned_data['apellido'],apodo = form.cleaned_data['apodo'],pais = form.cleaned_data['pais'],email = form.cleaned_data['email'])
             usuario.save()
             return render(request,"index.html",{"mensaje":"Usuario Creado:)"})
@@ -158,7 +162,23 @@ def editarPerfil(request):
         miFormulario = UserEditForm (initial={'imagen':usuario.avatar.imagen}, instance=request.user)
     return render(request, "editaPerfil.html",{"miFormulario":miFormulario,"usuario":usuario}) 
 
+def bio(request):
+    template = loader.get_template('bio.html')
+    
+    query = request.GET.get('query')
+    if query is None:
+        posts = Post.objects.all()
+    else:
+        posts = Post.objects.filter(titulo__icontains=query)
+
+    contexto = {
+        'posts': posts
+    }
+
+    html = template.render(contexto, request)
+    return HttpResponse(html)
+
+    
 class CambiarContrasenia(LoginRequiredMixin,PasswordChangeView):
         template_name="cambiarContrasenia.html"
         succes_url = reverse_lazy('cambiarContrasenia')
-
