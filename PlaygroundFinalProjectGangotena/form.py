@@ -1,6 +1,7 @@
 import datetime
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,UserModel,UserChangeForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm,PasswordChangeForm
+from django.contrib.auth.models import User
 
 from modelos import models
 
@@ -15,19 +16,14 @@ class UserCreationFormCustom(UserCreationForm):
     password2 = forms.CharField(label="repetir contrasena", widget=forms.PasswordInput)
     imagen = forms.ImageField(label="Avatar",required=False)
     class Meta:
-        model = UserModel
+        model = User
         fields =  ['username','email','password1','password2', 'imagen']       
         help_texts = {k:"" for k in fields}
 
-class UserEditForm(UserChangeForm):
-    password = None
-    email = forms.EmailField(label="Ingrese su email")
-    last_name = forms.EmailField(label="Apellido")
-    first_name = forms.EmailField(label="Nombre")
-    imagen = forms.ImageField(label="Avatar",required=False)
+class UserEditForm(PasswordChangeForm):
     class Meta:
-        model = UserModel
-        fields = ['email','last_name','imagen']
+        model = User
+        fields = ['password']
 
 class PostCreation(forms.ModelForm):
     titulo = forms.CharField(label="Titulo")

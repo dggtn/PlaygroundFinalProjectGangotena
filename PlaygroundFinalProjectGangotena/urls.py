@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PlaygroundFinalProjectGangotena.views import CambiarContrasenia,editarPerfil,index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request,bio
+from PlaygroundFinalProjectGangotena.views import CambiarContrasenia ,editarPerfil,index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request,bio
 from django.contrib.auth.views import LogoutView
 from modelos import views
 from django.conf import settings
@@ -40,7 +40,8 @@ urlpatterns = [
     path('login',login_request,name="login"),
     path('registro',register,name="registro"),
     path('logout',LogoutView.as_view(template_name="logout.html"), name="logout"),
-    path('editarPerfil',editarPerfil, name="editarPerfil"),
+    path('editarPerfil/',editarPerfil, name="editarPerfil"),
+    path('editarPerfil/actualizarPerfil/',editarPerfil, name="actualizarPerfil"),
     path('cambiarContrasenia',CambiarContrasenia.as_view(template_name="cambiarContrasenia.html"), name="cambiarContrasenia"),
 ]
 

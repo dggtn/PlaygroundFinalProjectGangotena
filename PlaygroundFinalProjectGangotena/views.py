@@ -12,6 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
 
 def posts(request):
     template = loader.get_template('posts.html')
@@ -147,21 +148,22 @@ def register(request):
     return render (request,"registro.html", {"form":form})
 
 def editarPerfil(request):
-    usuario= request.user
-    if request.method =='POST':
-       miFormulario = UserEditForm(request.POST, instance= request.user)
-
-       if miFormulario.is_valid():
-           if miFormulario.cleaned_data.get('imagen'):
-               usuario.avatar.imagen = miFormulario.cleaned_data.get('imagen')
-               usuario.avatar.save()
-           miFormulario.save()
-
-           return render(request,"index.html")
+    if request.method == 'GET':
+     template = loader.get_template('editarPerfil.html')
+     usuario= request.user
+     form =  PasswordChangeForm(usuario)
+     context = {
+     'usuario': usuario,
+     'form':form
+  }
+     html = template.render(context, request)
+     return HttpResponse(html)
     else:
-        miFormulario = UserEditForm (initial={'imagen':usuario.avatar.imagen}, instance=request.user)
-    return render(request, "editaPerfil.html",{"miFormulario":miFormulario,"usuario":usuario}) 
-
+     form = PasswordChangeForm(data=request.POST, user=request.user)
+     if form.is_valid():
+      form.save()
+      return render(request,"index.html",{"mensaje":"Perfil Actualizado)"})
+        
 def bio(request):
     template = loader.get_template('bio.html')
     
