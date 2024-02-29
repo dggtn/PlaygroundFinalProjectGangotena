@@ -39,3 +39,10 @@ class PostCreation(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['fecha'].initial = datetime.datetime.now()
+
+class AvatarForm(forms.ModelForm):
+    usuario = forms.ModelChoiceField(queryset=models.User.objects.all(), widget=forms.HiddenInput(), required=False)
+    imagen = forms.ImageField(label="Avatar", required=False)
+    class Meta:
+        model = models.Avatar
+        fields = ['imagen']

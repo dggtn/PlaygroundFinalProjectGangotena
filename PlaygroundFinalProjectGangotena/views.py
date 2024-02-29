@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse_lazy
-from PlaygroundFinalProjectGangotena.form import PostCreation, UserCreationFormCustom,UserEditForm
+from PlaygroundFinalProjectGangotena.form import PostCreation, UserCreationFormCustom,AvatarForm
 from modelos.models import Avatar, Post
 from modelos.models import Usuarios
 from modelos.models import Comentarios
@@ -13,6 +13,8 @@ from django.contrib.auth import login,authenticate
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
+
+
 
 def posts(request):
     template = loader.get_template('posts.html')
@@ -89,12 +91,21 @@ def nuevoUsuario(request):
 
 def guardar(request):
     if request.method == 'POST':
-        nombre = request.POST['nombre']
-        apellido = request.POST['apellido']
-        apodo = request.POST['apodo']
-        pais = request.POST['pais']
 
-        Usuarios(nombre = nombre, apellido =apellido,apodo=apodo,pais=pais).save()
+        formCrearUsuario = UserCreationFormCustom(request.POST)
+        if formCrearUsuario.is_valid():
+            nuevoUsuario = formCrearUsuario.save()
+            formAvatar = AvatarForm(data=request.POST, files=request.FILES, initial={'usuario': nuevoUsuario.id})
+            if formAvatar.is_valid():
+                formAvatar.save()
+            
+            nombre = request.POST['nombre']
+            apellido = request.POST['apellido']
+            apodo = request.POST['apodo']
+            pais = request.POST['pais']
+
+            nuevoUsuario = Usuarios(nombre = nombre, apellido =apellido,apodo=apodo,pais=pais).save()
+
     return redirect('usuarios')
 
 
@@ -139,8 +150,11 @@ def register(request):
         form = UserCreationFormCustom(request.POST)
         if form.is_valid():
             user = form.save()
-            avatar = Avatar(usuario=user, imagen=form.cleaned_data['imagen'])
-            avatar.save()
+            formAvatar = AvatarForm(data=request.POST, files=request.FILES, initial={'usuario': user.id})
+            if formAvatar.is_valid():
+                formAvatar.save()
+            else:
+                return HttpResponse(f"ERROR:{formAvatar.errors.as_text()} - USER:{user.id}")
             usuario = Usuarios(nombre = form.cleaned_data['nombre'],apellido = form.cleaned_data['apellido'],apodo = form.cleaned_data['apodo'],pais = form.cleaned_data['pais'],email = form.cleaned_data['email'])
             usuario.save()
             return render(request,"index.html",{"mensaje":"Usuario Creado:)"})
@@ -184,3 +198,18 @@ def bio(request):
 class CambiarContrasenia(LoginRequiredMixin,PasswordChangeView):
         template_name="cambiarContrasenia.html"
         succes_url = reverse_lazy('cambiarContrasenia')
+
+def mensajeria(request):
+    template = loader.get_template('mensajeria.html')
+    
+    query = request.GET.get('query')
+    if query is None:
+        usuarios = Usuarios.objects.all()
+    else:
+        usuarios= Usuarios.objects.filter(nombre__icontains=query)
+
+    contexto = {
+        'usuarios': usuarios
+    }
+    html = template.render(contexto, request)
+    return HttpResponse(html)

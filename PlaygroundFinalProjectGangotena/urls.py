@@ -14,9 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.urls import include, path
 from django.contrib import admin
-from django.urls import path
-from PlaygroundFinalProjectGangotena.views import CambiarContrasenia ,editarPerfil,index,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request,bio
+from PlaygroundFinalProjectGangotena.views import CambiarContrasenia ,editarPerfil,index, mensajeria,posts,postPorId,nuevoPost,publicar,usuarios,usuarioPorId,register,guardar,comentar,nuevoUsuario,nuevoComentario,login_request,bio
 from django.contrib.auth.views import LogoutView
 from modelos import views
 from django.conf import settings
@@ -43,6 +43,11 @@ urlpatterns = [
     path('editarPerfil/',editarPerfil, name="editarPerfil"),
     path('editarPerfil/actualizarPerfil/',editarPerfil, name="actualizarPerfil"),
     path('cambiarContrasenia',CambiarContrasenia.as_view(template_name="cambiarContrasenia.html"), name="cambiarContrasenia"),
+    path('mensajes/', include('mensajes.urls')),
+    path('mensajeria/', mensajeria,name='mensajeria')
+
+    
 ]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
