@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block contenido%}
+
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+  {% endif %}
+  <div class="row">
+    <div class="col">
+      {% if request.user.perfil and request.user.perfil.avatar %}
+        <img src="{{request.user.perfil.avatar.url}}" class="img-thumbnail" alt="...">
+      {% else  %}
+      <img src="{% static 'img/perfil_default.png' %}" class="img-thumbnail" alt="...">
+      {% endif %}
+      <form action="{% url 'actualizar_foto' %}" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ actualizarFotoDePerfilForm.as_p }}
+        <button type="submit">Cambiar foto</button>
+      </form>
+    </div>
+    <div class="col">
+      <form action="{% url 'actualizar_perfil' %}" method = "post">
+        {% csrf_token %}
+        {{ actualizarPerfil.as_p }}
+        <button type="submit">Actualiza tus datos</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock contenido%}

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block contenido%}
+
+<div class="p-3 mb-2 bg-info text-dark">
+  <div class="container p-3 mb-2 bg-white text-dark">
+    <h1 class="text-info">Registrate</h1>
+    <form action = "/registro" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button type="submit">Registrate!</button>
+    </form>
+
+{% endblock %}
+

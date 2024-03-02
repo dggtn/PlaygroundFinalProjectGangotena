@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block contenido%}
+<div class= "container">
+<h1 class="text-info">{{post.titulo}}</h1>
+<span >{{post.autor.username}}</span>
+    <div class="card">
+        <p>{{post.cuerpo}}</p>
+    </div>
+</div>
+<div class= "container">
+    <h3 class="text-info">Comentarios:</h3>
+{% for comentario in comentarios%}
+<h5>{{comentario.autor.username}}</h5>
+<p>{{comentario.cuerpo}}</p>
+{% endfor%}
+</div>
+<div class= "container">
+<form action="/comentarios/comentar/" method="post"> {% csrf_token %}
+    <div class="mb-3">
+        <input name="post_id" type="hidden" class="form-control" value="{{post.id}}" id="exampleFormControlInput1" placeholder="Titulo">
+      </div>
+    <div class="mb-3">
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Cuerpo:</label>
+        <textarea name="cuerpo" class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
+        <button class="btn btn-info fs-4" type="submit" role="button">Comentar</button>
+      </div>
+    </form>
+</div>
+{% endblock %}
+

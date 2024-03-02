@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block contenido%}
+    <div class="col-md-3 ml-md-auto">
+        <form action="/posts" method="GET">
+            <div class="input-group">
+                <input type="search" name="query" class="form-control rounded" placeholder="Buscar post por titulo" aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn fs-4 btn-outline-info" data-mdb-ripple-init>Buscar</button>
+            </div>
+        </form>
+    </div>
+    <h1 class="text-info">Todos los Posts:</h1>
+    {% for post in posts %}
+    <a href="{% url 'postPorId' id=post.id %}"style="text-decoration: none " class="card mb-3 mt-3" >
+        <h2 class="text-info">{{post.titulo}}</h2>
+        <h5 class="text-info">Autor: {{post.autor.username}}</h5>
+        <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label fs-3 text-info bold">Fecha: {{post.fecha}}</label>
+          </div>
+        <p>{{post.cuerpo}}</p>
+        <div class="mb-3">
+            {% if post.imagen %}
+            <img src={{post.imagen.url}}/>
+            {% endif %}
+          </div>
+    </a>
+    {% endfor %}
+
+
+{% endblock %}
+   
