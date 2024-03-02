@@ -72,7 +72,7 @@ def usuarios(request):
 
 
 def usuarioPorId(request,id):
-  usuarioPorId = Usuarios.objects.get(pk=id)
+  usuarioPorId = User.objects.get(pk=id)
   template = loader.get_template('usuario.html')
   context = {
     'usuario': usuarioPorId,
@@ -93,7 +93,7 @@ def guardar(request):
 
 
 def nuevoComentario(request):
-    usuario = Usuarios.objects.get(email= request.user.email)
+    usuario = User.objects.get(email= request.user.email)
     template = loader.get_template('nuevoComentario.html')
     context = {
     'usuario': usuario,
@@ -178,6 +178,6 @@ class CambiarContrasenia(LoginRequiredMixin,PasswordChangeView):
 def mensajeria(request):
     template = loader.get_template('mensajeria.html')
     contexto = {
-        'usuarios': Usuarios.objects.all()
+        'usuarios': User.objects.all()
     }
     return HttpResponse(template.render(contexto, request))
