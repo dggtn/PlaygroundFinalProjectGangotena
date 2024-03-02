@@ -31,4 +31,11 @@ Página Web destinada a usuarios que deseen publicar sus opiniones o ideas.
 
 ##### Back-End
 - Python 
-- Django 
+- Django
+- 
+## Pruebas Realizadas
+Ver archivo titulado "Pruebas Proyecto Python CH.xlsx" el cual se encuentra en el presente repositorio https://github.com/johannesgperez/ProyectoFinalMain.git
+
+## Video Demostración
+https://youtu.be/O3tgo0Txl9Q
+
