@@ -1,23 +1,19 @@
 import datetime
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm,PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 from django.contrib.auth.models import User
-
 from modelos import models
 
 class UserCreationFormCustom(UserCreationForm):
     username = forms.CharField(label="Usuario")
     email = forms.EmailField()
-    nombre = forms.CharField(label="Nombre")
-    apellido =forms.CharField(label="Apellido")
-    apodo = forms.CharField(label="Apodo")
-    pais = forms.CharField(label="Pais")
+    first_name = forms.CharField(label="Nombre")
+    last_name = forms.CharField(label="Apellido")
     password1 = forms.CharField(label="contrasena:", widget=forms.PasswordInput)
     password2 = forms.CharField(label="repetir contrasena", widget=forms.PasswordInput)
-    imagen = forms.ImageField(label="Avatar",required=False)
     class Meta:
         model = User
-        fields =  ['username','email','password1','password2', 'imagen']       
+        fields =  ['username','email','password1','password2', 'first_name', 'last_name']
         help_texts = {k:"" for k in fields}
 
 class UserEditForm(PasswordChangeForm):
@@ -27,22 +23,15 @@ class UserEditForm(PasswordChangeForm):
 
 class PostCreation(forms.ModelForm):
     titulo = forms.CharField(label="Titulo")
-    autor = forms.ModelChoiceField(queryset=models.Usuarios.objects.all(), widget=forms.HiddenInput())
+    autor = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput())
     imagen = forms.ImageField(label="Imagen",required=False)
     cuerpo = forms.CharField(label="Cuerpo")
     fecha = forms.DateTimeField(widget=forms.HiddenInput())
     class Meta:
         model = models.Post
-        fields =  ['titulo','imagen','cuerpo', 'autor', 'fecha']       
+        fields =  ['titulo','imagen','cuerpo', 'autor', 'fecha']
         help_texts = {k:"" for k in fields}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['fecha'].initial = datetime.datetime.now()
-
-class AvatarForm(forms.ModelForm):
-    usuario = forms.ModelChoiceField(queryset=models.User.objects.all(), widget=forms.HiddenInput(), required=False)
-    imagen = forms.ImageField(label="Avatar", required=False)
-    class Meta:
-        model = models.Avatar
-        fields = ['imagen']

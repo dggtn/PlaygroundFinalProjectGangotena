@@ -24,7 +24,7 @@
           </li>
           {%else%}
           <li>
-            <a class="navbar-brand" href="{% url 'editarPerfil'%}">{{request.user.username}}</a>
+            <a class="navbar-brand" href="{% url 'ver_perfil'%}">{{request.user.username}}</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="{% url 'posts' %}"id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,7 +51,7 @@
                 <a  class="nav-link"  href="{% url 'bio' %}">Sobre el autor del sitio web:</a>
                 </li>
                 <li>
-                  <a  class="nav-link"  href="{% url 'mensajeria'%}">mensajeria</a>
+                  <a  class="nav-link"  href="{% url 'mensajes_index'%}">mensajeria</a>
                   </li>
             </ul>
 

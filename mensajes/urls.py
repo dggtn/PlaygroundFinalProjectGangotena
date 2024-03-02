@@ -9,8 +9,10 @@ from django.conf import settings
 
 
 urlpatterns = [
-path('', message_list, name='message_list'),
-path('<int:pk>/', message_detail, name='message_detail')]
+  path('', views.index, name='mensajes_index'),
+  path('nuevo', views.nuevo, name='mensajes_nuevo'),
+  path('', message_list, name='message_list'),
+  path('<int:pk>/', message_detail, name='message_detail')]
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

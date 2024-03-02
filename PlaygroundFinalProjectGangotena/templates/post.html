@@ -3,6 +3,7 @@
 {% block contenido%}
 <div class= "container">
 <h1 class="text-info">{{post.titulo}}</h1>
+<span >{{post.autor.username}}</span>
     <div class="card">
         <p>{{post.cuerpo}}</p>
     </div>
@@ -10,19 +11,16 @@
 <div class= "container">
     <h3 class="text-info">Comentarios:</h3>
 {% for comentario in comentarios%}
-<h5>{{comentario.autor}}</h5>
+<h5>{{comentario.autor.username}}</h5>
 <p>{{comentario.cuerpo}}</p>
 {% endfor%}
 </div>
 <div class= "container">
 <form action="/comentarios/comentar/" method="post"> {% csrf_token %}
     <div class="mb-3">
-        <input name="id" type="hidden" class="form-control" value="{{post.id}}" id="exampleFormControlInput1" placeholder="Titulo">
+        <input name="post_id" type="hidden" class="form-control" value="{{post.id}}" id="exampleFormControlInput1" placeholder="Titulo">
       </div>
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Autor:</label>
-        <label for="exampleFormControlInput1" class="form-label fs-3 text-info bold">{{usuario.nombre}} {{usuario.apellido}}</label>
-      </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Cuerpo:</label>
         <textarea name="cuerpo" class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
