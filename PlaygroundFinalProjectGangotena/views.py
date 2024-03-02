@@ -124,7 +124,7 @@ def login_request(request):
 
             user = authenticate(username = usuario, password = contrasenia)
             login(request,user)
-            return render(request, "index.html", {"mensaje": f"Bienvenido {user.username}"})
+            return render(request, "index.html")
     return render(request, "login.html", {"form":form})
 
 def register(request):

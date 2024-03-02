@@ -5,6 +5,9 @@
   <div class="col-md-5 p-lg-5 mx-auto my-5">
     <h1 class="display-4 font-weight-normal text-white">BLOG DE LECTURA Y MODA</h1>
     <p class="lead font-weight-normal text-white">Escribe posts sobre tus libros favoritos, tendencias ,estilos y compartelo con tus amigos.</p>
+    {% if request.user.is_authenticated %}
+    <h2 class="text-white">Te damos la bienvenida {{user.first_name}}</h2>
+    {%endif%}
     {% if not request.user.is_authenticated %}
     <a class="btn btn-outline-secondary text-white" href="{% url 'registro' %}">registro</a>
     <a class="btn btn-outline-secondary text-white" href="{% url 'login' %}">inicia sesión</a>

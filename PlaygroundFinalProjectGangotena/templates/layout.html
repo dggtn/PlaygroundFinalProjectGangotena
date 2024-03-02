@@ -46,15 +46,15 @@
                 <li><a class="dropdown-item" href="{% url 'usuarios' %}">Ver usuarios</a></li>
               </ul>
               <li>
-                <form action = "{% url 'logout' %}" method="POST">{% csrf_token %}
-                  <button type="submit" class="btn btn-dark text-white">Logout</button>
-                </form>
-              </li>
-              <li>
                 <a  class="nav-link"  href="{% url 'bio' %}">Sobre el autor del sitio web:</a>
                 </li>
                 <li>
                   <a  class="nav-link"  href="{% url 'mensajes_index'%}">mensajeria</a>
+                  </li>
+                  <li>
+                    <form action = "{% url 'logout' %}" method="POST">{% csrf_token %}
+                      <button type="submit" class="btn btn-dark text-white">Logout</button>
+                    </form>
                   </li>
             </ul>
 

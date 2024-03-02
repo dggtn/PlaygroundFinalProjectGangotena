@@ -13,12 +13,12 @@
     </div>
     <main class="my-5">
         <div class="container bg-dark">
-          <section class="text-center">
+          <section class="text-center col-md-6">
             <h4 class="mb-5 text-white"><strong>Todos los Usuarios:</strong></h4>
 
 {% for usuario in usuarios%}
     {% if usuario.id != request.user.id%}
-    <div class="col">
+    <div class="col-md-6 text-left">
             <a  href="{% url 'usuarioPorId' id=usuario.id %}"style="text-decoration: none " class="card mb-3 mt-3">
                 <p class="text-dark no-link">Nombre:</p><p>{{usuario.first_name}}</p>
                 <div class="col">
@@ -36,9 +36,9 @@
             <div class="col">
                 <p class="text-dark">Avatar:</p>
                 {% if usuario.perfil and usuario.perfil.avatar %}
-                <img src="{{usuario.perfil.avatar.url}}" class="img-thumbnail" alt="...">
+                <img src="{{usuario.perfil.avatar.url}}" class="img-thumbnail" style="height:4em;width:7em;" alt="...">
                 {% else  %}
-                <img src="{% static 'img/perfil_default.png' %}" class="img-thumbnail" alt="...">
+                <img src="{% static 'img/perfil_default.png' %}" class="img-thumbnail" alt="..."style="height:4em;width:7em;" >
                 {% endif %}
             </div>
             </a>
