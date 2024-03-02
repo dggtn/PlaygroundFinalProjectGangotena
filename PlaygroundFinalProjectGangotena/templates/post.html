@@ -2,14 +2,14 @@
 
 {% block contenido%}
 <div class= "container">
-<h1 class="text-info">{{post.titulo}}</h1>
+<h1 class="text-dark">{{post.titulo}}</h1>
 <span >{{post.autor.username}}</span>
     <div class="card">
         <p>{{post.cuerpo}}</p>
     </div>
 </div>
 <div class= "container">
-    <h3 class="text-info">Comentarios:</h3>
+    <h3 class="text-dark">Comentarios:</h3>
 {% for comentario in comentarios%}
 <h5>{{comentario.autor.username}}</h5>
 <p>{{comentario.cuerpo}}</p>
@@ -22,9 +22,9 @@
       </div>
     <div class="mb-3">
       <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Cuerpo:</label>
+        <label for="exampleFormControlTextarea1" class="form-label text-white">Cuerpo:</label>
         <textarea name="cuerpo" class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
-        <button class="btn btn-info fs-4" type="submit" role="button">Comentar</button>
+        <button class="btn btn-white fs-4 text-white" type="submit" role="button">Comentar</button>
       </div>
     </form>
 </div>

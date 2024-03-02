@@ -1,22 +1,24 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block contenido%}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-white">
+  <div class="col-md-12 p-lg-12 mx-auto my-12">
         <div class="row rounded-lg overflow-hidden shadow">
           <!-- Users box-->
           <div class="col-5 px-0">
             <div class="bg-white">
       
-              <div class="bg-gray px-4 py-2 bg-light">
-                <p class="h5 mb-0 py-1">Tus chats:</p>
+              <div class="bg-gray px-4 py-2 bg-dark">
+                <p class="h5 mb-0 py-1 text-white ">Tus chats:</p>
               </div>
               <div class="messages-box">
                 <div class="list-group rounded-0">
                 {% for usuario in usuarios%}
-                  <a class="list-group-item list-group-item-action active text-white rounded-0" href="{% url 'mensajes_index'%}?id_contacto={{usuario.id}}">
-                    <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                  <a class="list-group-item list-group-item-action bg-white text-white rounded-0  text-dark" href="{% url 'mensajes_index'%}?id_contacto={{usuario.id}}">
+                    <div class="media"><img src={{usuario.perfil.avatar.url}} alt="user" width="50" class="rounded-circle">
                       <div class="media-body ml-4">
                         <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h6 class="mb-0">{{usuario.username}}</h6><small class="small font-weight-bold">25 Dec</small>
+                          <h6 class="mb-0 text-dark">{{usuario.username}}</h6>
                         </div>
                       </div>
                     </div>
@@ -28,21 +30,21 @@
           </div>
           <!-- Chat Box-->
           <div class="col-7 px-0">
-            <div class="px-4 py-5 chat-box bg-white">
+            <div class="px-4 py-5 chat-box bg-dark">
               {% for mensaje in mensajes %}
               <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
                 <div class="media-body ml-3">
                   <div class="bg-light rounded py-2 px-3 mb-2">
-                    <p class="text-small mb-0 text-muted">{{mensaje.body}}</p>
+                    <p class="text-small mb-0 text-muted text-white">{{mensaje.body}}</p>
                   </div>
-                  <p class="small text-muted">{{mensaje.created_at}}</p>
+                  <p class="small text-muted text-white">{{mensaje.created_at}}</p>
                 </div>
               </div>
               {% empty %}
-                No hay mensajes con {{usuario_contactado.username}}
+                <p class="text-white"No hay mensajes con {{usuario_contactado.username}}></p>
               {% endfor %}
-            <!-- Typing area -->
-            <form action="{% url 'mensajes_nuevo' %}" method="POST" class="bg-light">
+
+            <form class="text-white" action="{% url 'mensajes_nuevo' %}" method="POST" class="bg-dark">
               {% csrf_token %}
               <div class="input-group">
                 {% if chat %}
@@ -50,9 +52,9 @@
                 {% endif %}
                 <input type="hidden" name="emisor_id" value="{{request.user.id}}"/>
                 <input type="hidden" name="receptor_id" value="{{usuario_contactado.id}}"/>
-                <input type="text" name="mensaje" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+                <input class="bg-white text-dark" type="text" name="mensaje" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-dark">
                 <div class="input-group-append">
-                  <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i>Enviar</button>
+                  <button id="button-addon2" type="submit" class="btn btn-link bg-white text-dark"> <i class="fa fa-paper-plane"></i>Enviar</button>
                 </div>
               </div>
             </form>

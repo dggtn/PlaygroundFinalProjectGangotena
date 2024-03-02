@@ -1,36 +1,40 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block contenido%}
-<form class="d-flex"type="search" placeholder="Buscar" aria-label="Search">
-    <form action="/usuarios" method="GET">
-      <div class="input-group">
-          <input type="search" name="query" class="form-control me-2"  placeholder="Buscar usuarios" aria-label="Search" aria-describedby="search-addon" />
-          <button type="submit" class="btn fs-4 btn-outline-info" data-mdb-ripple-init>Buscar</button>
-      </div>
-  </form>
-<h1 class="text-info">Todos los participantes:</h1>
-<div class="container">
-    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+<main class="my-5 bg-dark">
+    <div class="container">
+      <section class="text-center">
+        <form action="/usuarios" method="GET">
+            <div class="input-group">
+                <input type="search" name="query" class="form-control rounded mx-5 mt-5" placeholder="Buscar post por nombre" aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn fs-4 btn-dark text-white">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <main class="my-5">
+        <div class="container bg-dark">
+          <section class="text-center">
+            <h4 class="mb-5 text-white"><strong>Todos los Usuarios:</strong></h4>
 
 {% for usuario in usuarios%}
     {% if usuario.id != request.user.id%}
     <div class="col">
             <a  href="{% url 'usuarioPorId' id=usuario.id %}"style="text-decoration: none " class="card mb-3 mt-3">
-                <p class="text-info no-link">Nombre:</p><p>{{usuario.first_name}}</p>
+                <p class="text-dark no-link">Nombre:</p><p>{{usuario.first_name}}</p>
                 <div class="col">
-                <p class="text-info">Apellido:</p><p>{{usuario.last_name}}</p>
+                <p class="text-dark">Apellido:</p><p>{{usuario.last_name}}</p>
             </div>
 
                 <div class="col">
-                <p class="text-info">Apodo:</p><p>{{usuario.perfil.apodo}}</p>
+                <p class="text-dark">Apodo:</p><p>{{usuario.perfil.apodo}}</p>
             </div>
 
             <div class="col">
-                <p class="text-info">País:</p><p>{{usuario.perfil.pais}}</p>
+                <p class="text-dark">País:</p><p>{{usuario.perfil.pais}}</p>
             </div>
 
             <div class="col">
-                <p class="text-info">Avatar:</p>
+                <p class="text-dark">Avatar:</p>
                 {% if usuario.perfil and usuario.perfil.avatar %}
                 <img src="{{usuario.perfil.avatar.url}}" class="img-thumbnail" alt="...">
                 {% else  %}
@@ -42,4 +46,11 @@
     {% endif %}
 {%endfor%}
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 {% endblock %}

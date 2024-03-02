@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
 {% block contenido%}
-<h2 class="text-info">Bienvenido al perfil de {{usuario.username}}<h2>
+<h2 class="text-dark">Bienvenido al perfil de {{usuario.username}}<h2>
 <div class="container">
     <div class="card">
 
-<p class="text-info fs-3">Nombre:</p><p>{{usuario.first_name}}</p>
+<p class="text-dark fs-3">Nombre:</p><p>{{usuario.first_name}}</p>
 <br>
-<p class="text-info fs-3">Apellido:</p><p>{{usuario.last_name}}</p>
+<p class="text-dark fs-3">Apellido:</p><p>{{usuario.last_name}}</p>
 <br>
-<p class="text-info fs-3">Apodo:</p><p>{{usuario.perfil.apodo}}</p>
+<p class="text-dark fs-3">Apodo:</p><p>{{usuario.perfil.apodo}}</p>
 <br>
-<p class="text-info fs-3">País:</p><p>{{usuario.perfil.pais}}</p>
+<p class="text-dark fs-3">País:</p><p>{{usuario.perfil.pais}}</p>
 <br>
     </div>
 

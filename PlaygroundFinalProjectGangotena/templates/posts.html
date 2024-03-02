@@ -1,31 +1,50 @@
 {% extends "layout.html" %}
 
 {% block contenido%}
-    <div class="col-md-3 ml-md-auto">
+<main class="my-5 bg-dark">
+    <div class="container">
+      <section class="text-center">
         <form action="/posts" method="GET">
             <div class="input-group">
-                <input type="search" name="query" class="form-control rounded" placeholder="Buscar post por titulo" aria-label="Search" aria-describedby="search-addon" />
-                <button type="submit" class="btn fs-4 btn-outline-info" data-mdb-ripple-init>Buscar</button>
+                <input type="search" name="query" class="form-control rounded mx-5 mt-5" placeholder="Buscar post por titulo" aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn fs-4 btn-dark text-white">Buscar</button>
             </div>
         </form>
     </div>
-    <h1 class="text-info">Todos los Posts:</h1>
+    <main class="my-5">
+        <div class="container bg-dark">
+          <section class="text-center">
+            <h4 class="mb-5 text-white"><strong>Todos los Posts:</strong></h4>
     {% for post in posts %}
-    <a href="{% url 'postPorId' id=post.id %}"style="text-decoration: none " class="card mb-3 mt-3" >
-        <h2 class="text-info">{{post.titulo}}</h2>
-        <h5 class="text-info">Autor: {{post.autor.username}}</h5>
-        <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label fs-3 text-info bold">Fecha: {{post.fecha}}</label>
-          </div>
-        <p>{{post.cuerpo}}</p>
-        <div class="mb-3">
-            {% if post.imagen %}
-            <img src={{post.imagen.url}}/>
-            {% endif %}
-          </div>
-    </a>
+    <main class="my-5">
+        <div class="container">
+          <section class="text-center">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4">
+                  <div class="card bg-white rounded">
+            <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                {% if post.imagen %}
+                <img src={{post.imagen.url}} class="img-fluid"/>
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </div>
+                {% endif %}
+    <div class="card-body">
+      <h4 class="card-title">{{post.titulo}}</h4>
+      <h5 class="card-title">{{post.autor.username}}</h4>
+      <h6 class="card-title"><label for="exampleFormControlInput1" class="form-label fs-3 text-dark bold">{{post.fecha}}</label></h6>
+      <p class="card-text">
+          {{post.cuerpo}}
+      </p>
+      <a href="{% url 'postPorId' id=post.id %}"style="text-decoration: none " class="btn btn-outline-secondary bg-dark text-white" data-mdb-ripple-init>Comentar</a>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+</div>
+</section>
     {% endfor %}
-
 
 {% endblock %}
    
+ 
