@@ -48,6 +48,7 @@
               {% csrf_token %}
               <div class="input-group">
                 {% if chat %}
+                {{chat.id}}
                 <input type="hidden" name="chat_id" value="{{chat.id}}"/>
                 {% endif %}
                 <input type="hidden" name="emisor_id" value="{{request.user.id}}"/>
